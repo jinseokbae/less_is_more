@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="LessIsMore">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Less is More</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/iccv-navbar-logo.svg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: 30px auto;
+            /* Adds vertical spacing between columns */
+            padding: 15px;
+            /* Adds internal padding for aesthetic spacing */
+            background-color: #ffffff;
+            /* Optional: Add a background for better visual separation */
+            border: 1px solid #ccc;
+            /* Optional: Add a border for better definition */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-wrapper {
+            width: 45%;
+            margin: 0 2.5%;
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .flat-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .flat-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #e0e0e0;
+            /* grey background */
+            color: black;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .flat-button:hover {
+            background-color: #c0c0c0;
+        }
+
+        .flat-button img {
+            width: 20px;
+            height: 20px;
+        }
+
+
+        .button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .arrow {
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .prev .arrow {
+            border-width: 10px 15px 10px 0;
+            border-color: transparent gray transparent transparent;
+        }
+
+        .next .arrow {
+            border-width: 10px 0 10px 15px;
+            border-color: transparent transparent transparent gray;
+        }
+
+        .prev {
+            left: 5px;
+        }
+
+        .next {
+            right: 5px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+
+
+    <style>
+        /* Toggle arrow position is fixed */
+        #toggle-comparisons {
+            position: relative;
+            z-index: 10;
+        }
+
+        #toggle-arrow {
+            transition: transform 0.3s ease;
+            /* Smooth arrow rotation */
+        }
+
+        #comparisons-section {
+            transition: opacity 0.3s ease, height 0.3s ease;
+            /* Smooth content visibility */
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-2 publication-title"> Less is More: Improving Motion Diffusion Models with
+                            Sparse Keyframes </h1>
+                        <div class="is-size-6 publication-authors">
+                            <span class="author-block">
+                                <a href="https://jinseokbae.github.io/" target="_blank">Jinseok Bae</a> <sup>1</sup>,
+                                <a href="https://inwoohwang.me/" target="_blank">Inwoo Hwang</a> <sup>1</sup>,
+                                <a href="https://www.linkedin.com/in/young-yoon--lee/" target="_blank">Young Yoon
+                                    Lee</a> <sup>2</sup>,
+                                <a href="https://ziyuguo99.github.io/" target="_blank">Ziyu Guo</a> <sup>3</sup>,
+                                <a href="https://www.linkedin.com/in/joseph-liu-eng-ann/" target="_blank">Joseph Liu</a>
+                                <sup>2</sup>
+                            </span>
+                            <span class="author-block">
+                                <a href="https://www.itzikbs.com/" target="_blank">Yizhak Ben-Shabat</a> <sup>2</sup>,
+                                <a href="https://scholar.google.com/citations?user=TjYQs-AAAAAJ&hl=en"
+                                    target="_blank">Young Min Kim</a> <sup>1</sup>,
+                                <a href="https://scholar.google.co.kr/citations?user=xhkzmycAAAAJ&hl=ko"
+                                    target="_blank">Mubbasir Kapadia</a> <sup>2</sup>
+                        </div>
+                        <br>
+                        <div class="is-size-6 publication-affiliations">
+                            <span class="author-block">
+                                <sup>1</sup>Seoul National University
+                            </span>
+                        </div>
+                        <div class="is-size-6 publication-affiliations">
+                            <span class="author-block">
+                                <sup>2</sup>Roblox
+                            </span>
+                        </div>
+                        <div class="is-size-6 publication-affiliations">
+                            <span class="author-block">
+                                <sup>3</sup>The Chinese University of Hong Kong
+                            </span>
+                        </div>
+                        <br>
+                        <div
+                            style="display: flex; justify-content: center; align-items: center; gap: 32px; margin-top: 10px;">
+                            <img src="static/images/snu_logo.png" alt="Seoul National University Logo"
+                                style="height: 48px;">
+                            <img src="static/images/roblox_logo.png" alt="Roblox Logo" style="height: 20px;">
+                            <img src="static/images/cuhk_logo.png" alt="The Chinese University of Hong Kong Logo"
+                                style="height: 48px;">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flat-button-container">
+                    <a class="flat-button" href="https://arxiv.org/abs/your-paper-id" target="_blank">
+                        <img src="static/images/arxiv_logo.png" alt="arXiv logo" style="height: 24px; width: auto;">
+                        arXiv
+                    </a>
+                    <a class="flat-button" href="https://github.com/your-repo" target="_blank">
+                        <img src="static/images/github_logo.png" alt="GitHub logo">
+                        Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                        <p></p>
+                        Recent advances in motion diffusion models have led to remarkable progress in diverse motion
+                        generation tasks, including text-to-motion synthesis.
+                        However, existing approaches represent motions as dense frame sequences, requiring the model to
+                        process redundant or less informative frames.
+                        The processing of dense animation frames imposes significant training and computational
+                        complexity, especially when learning complex distributions of large motion datasets using modern
+                        neural architectures.
+                        This severely limits the performance of generative motion models for downstream tasks.
+                        <p></p>
+                        Inspired by professional animators who mainly focus on sparse keyframes, we propose a novel
+                        diffusion framework explicitly designed around sparse and semantically meaningful keyframes.
+                        Our method reduces computation by masking non-keyframes and efficiently interpolating missing
+                        frames.
+                        We dynamically refine the keyframe mask during inference to prioritize informative frames in
+                        later diffusion steps.
+                        Extensive experiments show that our approach consistently outperforms state-of-the-art methods
+                        in text alignment and motion realism, while also effectively maintaining high performance at
+                        significantly fewer diffusion steps.
+                        We further validate the robustness of our framework by using it as a generative prior and
+                        adapting it to different downstream tasks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">Method Overview</h2>
+                    <div class="content has-text-justified">
+                        <p></p>
+                        We present a <strong>Sparse Motion Diffusion Model (sMDM)</strong> that improves motion
+                        diffusion models by focusing on <strong>sparse keyframes</strong>.
+                        sMDM uses a binary keyframe mask to exclude non-keyframes from the self-attention layers.
+                        During training, a keyframe mask is derived from the clean input frames via keyframe selection.
+                        At inference, the model starts with a uniform keyframe mask at earlier timesteps (t > T'), then
+                        updates the mask by selecting keyframes from noised input frames for later timesteps.
+                        Finally, sMDM reconstructs the dense motion by linearly interpolating features of the selected
+                        keyframes.
+                        To ensure smooth interpolation, we replace the input and output linear layers with Lipschitz
+                        MLPs.
+                        Red boxes indicate the changes from the baseline.
+                        <p></p>
+                    </div>
+                    <div class="column is-centered has-text-centered">
+                        <img src="static/images/0306_model_architecture.jpg" alt="Method Overview Image"
+                            style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">Text-conditioned Motion Generation</h2>
+
+                    <div class="content has-text-justified">
+                        <p></p>
+                        We showcase the performance of our model on text-to-motion synthesis tasks using the
+                        <strong>HumanML3D</strong> dataset.
+                        Our models consistently generate high-quality motions that closely align with the input text
+                        prompts.
+                        We have two variants of our method, denoted <strong>sMDM</strong> and
+                        <strong>sMDM-stella</strong>.
+                        Like many motion diffusion models, sMDM uses <strong>CLIP ViT-B/32</strong> as its text encoder.
+                        In contrast, sMDM-stella employs the larger <strong>Stella-1.5B</strong> to explore the
+                        compatibility of our approach with more advanced text encoders.
+                        Additionally, we visualize results from the baseline <strong>MDM</strong> and
+                        <strong>MotionGPT</strong> models, which serve as representatives of approaches using standard
+                        and advanced text encoders, respectively.
+                        <p></p>
+                    </div>
+
+                    <div class="column is-centered has-text-centered">
+
+                        <div class="toggle-section" style="margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <button class="toggle-button" style="border: none; background: none; cursor: pointer;">
+                                    <span class="toggle-arrow" style="
+                                    display: inline-block;
+                                    width: 0;
+                                    height: 0;
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 15px solid black;
+                                    transition: transform 0.3s ease;
+                                "></span>
+                                </button>
+                                <p style="font-weight: bold; margin: 0;">Comparison 1 - 3</p>
+
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                Baselines sometimes fail to generate motions that faithfully reflect the text
+                                conditions, while ours consistently generate <strong>text-aligned motions</strong>.
+                                <p></p>
+
+                            </div>
+
+                            <!-- Content to Toggle -->
+                            <div class="toggle-content" style="display: block; width: 100%;">
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "a person with their knees on the ground and their hands,
+                                        gets up."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison1_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> ❌ (wrong start pose)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison1_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison1_mgpt.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MotionGPT</strong> 🟢</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison1_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stella (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "the person is walking forward and turn around like a
+                                        monster."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison3_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> ❌ (not a monster style)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison3_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison3_mgpt.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MotionGPT</strong> 🟢</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison3_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stella (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "the person is doing a dance move."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison5_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> 🤔 (static movement)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison5_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison5_mgpt.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MotionGPT</strong> ❌ (not a dancing)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison5_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stella (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column is-centered has-text-centered">
+
+                        <div class="toggle-section" style="margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <button class="toggle-button" style="border: none; background: none; cursor: pointer;">
+                                    <span class="toggle-arrow" style="
+                                    display: inline-block;
+                                    width: 0;
+                                    height: 0;
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 15px solid black;
+                                    transition: transform 0.3s ease;
+                                "></span>
+                                </button>
+                                <p style="font-weight: bold; margin: 0;">Comparison 4 - 6</p>
+
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                Our models excel at capturing <strong>nuanced styles and contextual details</strong>
+                                from complex textual descriptions.
+                                <p></p>
+                            </div>
+
+                            <!-- Content to Toggle -->
+                            <div class="toggle-content" style="display: block; width: 100%;">
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "A woman walks with a forward direction and a crossed,
+                                        catwalk motion style to reach an idle position."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison6_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> ❌ (not a catwalk)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison6_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison6_mgpt.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MotionGPT</strong> ❌ (not a forward, catwalk)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison6_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stella (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "a person ducks down suddenly, steps forward, and stands
+                                        back up."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison2_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> ❌ (skips forward step)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison2_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison2_mgpt.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MotionGPT</strong> ❌ (skips forward step)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison2_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stella (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "a person dancing, starting in a t pose, the. turns,
+                                        continues to dance and finishes with another turn."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison4_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> 🤔 (no finish turn)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison4_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> 🤔 (no finish turn)</p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison4_mgpt.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MotionGPT</strong> ❌ (not a dancing)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison4_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stella (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="column is-centered has-text-centered">
+
+                        <div class="toggle-section" style="margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <button class="toggle-button" style="border: none; background: none; cursor: pointer;">
+                                    <span class="toggle-arrow" style="
+                                    display: inline-block;
+                                    width: 0;
+                                    height: 0;
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 15px solid black;
+                                    transition: transform 0.3s ease;
+                                "></span>
+                                </button>
+                                <p style="font-weight: bold; margin: 0;">Failure Case</p>
+
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                However, our models occasionally fail.
+                                As illustrated in this example, our model struggles to capture wiggling motions, which
+                                involve <strong>high-frequency</strong> body movements.
+                                Although increasing the number of keyframes could address this issue, it might also
+                                diminish the advantages of using a sparse keyframe approach.
+                                <strong>Adaptive or learnable keyframe selection</strong> could be potential solutions.
+                                We leave a more in-depth investigation of this limitation to future work.
+                                <p></p>
+                            </div>
+
+                            <!-- Content to Toggle -->
+                            <div class="toggle-content" style="display: block; width: 100%;">
+                                <div class="columns is-centered">
+                                    <p></p>
+                                    <strong>Text Condition : "a person wiggles their hips back and forth while waving
+                                        their arms."</strong>
+                                    <p></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison7_dmdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>MDM</strong> 🟢</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison7_smdm.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM (Ours)</strong> ❌ (not wiggling)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/t2m/comparison7_stella.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sMDM-stlla (Ours)</strong> 🤔 (wiggling?)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+
+
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">Long-Sequence Generation</h2>
+
+                    <div class="content has-text-justified">
+                        <p></p>
+                        We further demonstrate that sMDM can serve as a generative prior in a downstream task.
+                        Here, we adopt <strong>DoubleTake</strong> strategy, which uses a pre-trained
+                        <strong>MDM</strong> or <strong>sMDM</strong> to generate multiple short motion segments, then
+                        revises their overlaps to ensure coherent transitions.
+                        To distinguish between the two pre-trained priors (both with 50 diffusion steps and a
+                        transformer encoder), we denote them as <strong>PriorMDM</strong> and
+                        <strong>sPriorMDM</strong>.
+                        We set the transition length to 1 second and use a 0.25 second margin for blending each segment.
+                        In the videos, we indicate transitions with <span
+                            style="color: rgba(255, 166, 0, 1);">yellow</span> meshes.
+                        Please note four input texts are reflected in the generated motions in a
+                        <strong>sequential</strong> manner.
+                        <p></p>
+
+                    </div>
+
+
+                    <div class="column is-centered has-text-centered">
+
+                        <div class="toggle-section" style="margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <button class="toggle-button" style="border: none; background: none; cursor: pointer;">
+                                    <span class="toggle-arrow" style="
+                                    display: inline-block;
+                                    width: 0;
+                                    height: 0;
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 15px solid black;
+                                    transition: transform 0.3s ease;
+                                "></span>
+                                </button>
+                                <p style="font-weight: bold; margin: 0;">Comparison 1 - 2</p>
+
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                Compared to PriorMDM, <strong>sPriorMDM</strong> generates much
+                                <strong>expressive</strong> motions while <strong>preserving naturalness and
+                                    smoothness</strong> in the transitions.
+                                We attribute this difference to the <strong>keyframe-centric</strong> training of sMDM,
+                                which enables the model to learn realistic motion dynamics from a sparse set of frames.
+                                <p></p>
+
+                            </div>
+
+                            <!-- Content to Toggle -->
+                            <div class="toggle-content" style="display: block; width: 100%;">
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <p><strong>Text 1 : "A person skates on the ice."</strong></p>
+                                        <p><strong>Text 2 : "A person is pushed and falls to the ground."</strong></p>
+                                        <p><strong>Text 3 : "A person climbs up the stairs and then goes down."</strong>
+                                        </p>
+                                        <p><strong>Text 4 : "A person is doing a salsa dance."</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/long_motions/comparison2_PriorMDM.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                        <p><strong>PriorMDM</strong> 🤔 (less expressive)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/long_motions/comparison2_sPriorMDM.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                        <p><strong>sPriorMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <p><strong>Text 1 : "A person crawls and then stands up."</strong></p>
+                                        <p><strong>Text 2 : "A person picks up a ball from the ground and then throws it
+                                                away."</strong></p>
+                                        <p><strong>Text 3 : "A person punches and kicks in the air."</strong></p>
+                                        <p><strong>Text 4 : "A person waves his body."</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/long_motions/comparison1_PriorMDM.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                        <p><strong>PriorMDM</strong> ❌ (fails in 1 and 4)</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/long_motions/comparison1_sPriorMDM.mp4"
+                                                type="video/mp4">
+                                        </video>
+                                        <p><strong>sPriorMDM (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="column is-centered has-text-centered">
+
+                        <div class="toggle-section" style="margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <button class="toggle-button" style="border: none; background: none; cursor: pointer;">
+                                    <span class="toggle-arrow" style="
+                                    display: inline-block;
+                                    width: 0;
+                                    height: 0;
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 15px solid black;
+                                    transition: transform 0.3s ease;
+                                "></span>
+                                </button>
+                                <p style="font-weight: bold; margin: 0;">Additional Samples 1 - 3</p>
+
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                Compared to PriorMDM, <strong>sPriorMDM</strong> generates much
+                                <strong>expressive</strong> motions while <strong>preserving naturalness and
+                                    smoothness</strong> in the transitions.
+                                We attribute this difference to the <strong>keyframe-centric</strong> training of sMDM,
+                                which enables the model to learn realistic motion dynamics from a sparse set of frames.
+                                <p></p>
+
+                            </div>
+
+                            <!-- Content to Toggle -->
+                            <div class="toggle-content" style="display: block; width: 100%;">
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <p><strong>Text 1 : "A person leaps upward with explosive energy."</strong></p>
+                                        <p><strong>Text 2 : "A person spins around in a rapid twirl several
+                                                times."</strong></p>
+                                        <p><strong>Text 3 : "A person drinks a cup of water."</strong></p>
+                                        <p><strong>Text 4 : "A person starts running on a treadmill."</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop
+                                            style="width: 50%; height: auto; display: block; margin: 0 auto;">
+                                            <source src="static/videos/long_motions/ours_only_1.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sPriorMDM</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <p><strong>Text 1 : "A person sits down on a chair."</strong></p>
+                                        <p><strong>Text 2 : "A person stands and stretches slowly, raising both arms
+                                                overhead."</strong></p>
+                                        <p><strong>Text 3 : "A person walks toward the window to draw back the
+                                                curtains."</strong></p>
+                                        <p><strong>Text 4 : "A person moves into the kitchen to prepare a cup of
+                                                coffee."</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop
+                                            style="width: 50%; height: auto; display: block; margin: 0 auto;">
+                                            <source src="static/videos/long_motions/ours_only_2.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sPriorMDM</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="content is-centered">
+                                    <hr class="case-divider">
+                                </div>
+                                <div class="column is-centered has-text-centered">
+                                    <p><strong>Text 1 : "A person begins with a light walk along a park
+                                            pathway."</strong></p>
+                                    <p><strong>Text 2 : "A person sprints along a track."</strong></p>
+                                    <p><strong>Text 3 : "A person stops and performs a series of arm swings."</strong>
+                                    </p>
+                                    <p><strong>Text 4 : "A person finishes by pausing to stretch on a grassy
+                                            area."</strong></p>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop
+                                            style="width: 50%; height: auto; display: block; margin: 0 auto;">
+                                            <source src="static/videos/long_motions/ours_only_3.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sPriorMDM</strong></p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+    </section>
+
+
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="column is-centered has-text-centered">
+                    <h2 class="title is-3">Real-Time Character Control</h2>
+
+                    <div class="content has-text-justified">
+                        <p></p>
+                        We further validate our approach by applying it to <strong>Diffusion Planner (DiP)</strong>, an
+                        autoregressive motion diffusion model designed for <strong>character control</strong>.
+                        Unlike standard motion generators, DiP predicts 2 seconds of future motion from 1 second of past
+                        trajectories.
+                        We name our model <strong>sDiP</strong>, which is trained with the same keyframe-centric
+                        approach as sMDM.
+                        <p></p>
+
+                    </div>
+
+
+                    <div class="column is-centered has-text-centered">
+
+                        <div class="toggle-section" style="margin-bottom: 10px;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start;">
+                                <button class="toggle-button" style="border: none; background: none; cursor: pointer;">
+                                    <span class="toggle-arrow" style="
+                                    display: inline-block;
+                                    width: 0;
+                                    height: 0;
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 15px solid black;
+                                    transition: transform 0.3s ease;
+                                "></span>
+                                </button>
+                                <p style="font-weight: bold; margin: 0;">Comparison</p>
+
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                We evaluate our model on extended scenarios in which the character performs a series of
+                                actions.
+                                In these scenarios, the character is <strong>dynamically controlled</strong> using text
+                                prompts that change <strong>every 8 seconds</strong>.
+                                We visualize the <strong>progression of time</strong> using the following color
+                                sequence: <span style="color: rgba(255, 89, 94, 1);">red</span>, <span
+                                    style="color: rgba(255, 146, 76, 1);">orange</span>, <span
+                                    style="color: rgba(255, 202, 58, 1);">yellow</span>, <span
+                                    style="color: rgba(138, 201, 38, 1);">green</span>, <span
+                                    style="color: rgba(25, 139, 195, 1);">blue</span>, and <span
+                                    style="color: rgba(106, 76, 147, 1);">purple</span>.
+                                <p></p>
+
+                            </div>
+
+                            <!-- Content to Toggle -->
+                            <div class="toggle-content" style="display: block; width: 100%;">
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <p><strong><span style="color: rgba(255, 89, 94, 1);">Text 1</span> : "A person
+                                                is warming up."</strong></p>
+                                        <p><strong><span style="color: rgba(255, 146, 76, 1);">Text 2</span> : "A person
+                                                walks forward, bends down to pick something up off the ground."</strong>
+                                        </p>
+                                        <p><strong><span style="color: rgba(255, 202, 58, 1);">Text 3</span> : "A person
+                                                is getting up and perform jumping jacks."</strong></p>
+                                        <p><strong><span style="color: rgba(138, 201, 38, 1);">Text 4</span> : "A person
+                                                is running back and forth."</strong></p>
+                                        <p><strong><span style="color: rgba(25, 139, 195, 1);">Text 5</span> : "A person
+                                                punches in a manner consistent with martial arts."</strong></p>
+                                        <p><strong><span style="color: rgba(106, 76, 147, 1);">Text 6</span> : "A person
+                                                dances like a pop star."</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="columns is-centered">
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/dip/comparison1_dip.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>DiP</strong> 🟢</p>
+                                    </div>
+                                    <div class="column is-centered has-text-centered">
+                                        <video poster="" id="tree" playsinline autoplay muted loop width="100%">
+                                            <source src="static/videos/dip/comparison1_sdip.mp4" type="video/mp4">
+                                        </video>
+                                        <p><strong>sDiP (Ours)</strong> 🟢</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content has-text-justified">
+                                <p></p>
+                                Although DiP often generates plausible motions as sDiP, we find that
+                                <strong>sDiP</strong> often produces much <strong>expressive</strong> and
+                                <strong>contextually relevant</strong> motions.
+                                This conclusion is follwed by the quantitative evaluation, where our models, including
+                                target-conditioning variants (<strong>sDiP-T</strong>), <strong>clearly
+                                    outperform</strong> the baseline for all the metrics.
+                                <p></p>
+                            </div>
+                            <div class="column is-centered has-text-centered">
+                                <img src="static/images/dip_tables.png" alt="Method Overview Image"
+                                    style="max-width: 100%; height: auto;">
+                            </div>
+
+                        </div>
+
+
+    </section>
+
+
+    <script>
+        const toggleButton = document.getElementById("toggle-comparisons");
+        const comparisonsSection = document.getElementById("comparisons-section");
+        const toggleArrow = document.getElementById("toggle-arrow");
+
+        toggleButton.addEventListener("click", () => {
+            const isHidden = comparisonsSection.style.display === "none";
+
+            if (isHidden) {
+                comparisonsSection.style.display = "block"; // Show the content
+                toggleArrow.style.transform = "rotate(0deg)"; // Down arrow
+            } else {
+                comparisonsSection.style.display = "none"; // Hide the content
+                toggleArrow.style.transform = "rotate(180deg)"; // Up arrow
+            }
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.toggle-section').forEach(toggleGroup => {
+            const toggleButton = toggleGroup.querySelector('.toggle-button');
+            const contentSection = toggleGroup.querySelector('.toggle-content');
+            const toggleArrow = toggleButton.querySelector('.toggle-arrow');
+
+            toggleButton.addEventListener('click', () => {
+                const isHidden = contentSection.style.display === "none";
+
+                if (isHidden) {
+                    contentSection.style.display = "block"; // Show content
+                    toggleArrow.style.transform = "rotate(0deg)"; // Down arrow
+                } else {
+                    contentSection.style.display = "none"; // Hide content
+                    toggleArrow.style.transform = "rotate(180deg)"; // Up arrow
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.video-container').forEach(container => {
+            const videos = Array.from(container.querySelectorAll('video'));
+            const prevButton = container.querySelector('.prev');
+            const nextButton = container.querySelector('.next');
+            const caption = container.querySelector('p');
+            const captionsList = JSON.parse(container.dataset.captions);
+
+            let currentIndex = 0;
+
+            function showVideo(index) {
+                // Hide all videos in this container
+                videos.forEach(video => {
+                    video.style.display = 'none';
+                    video.pause();
+                });
+
+                // Show the selected video
+                videos[index].style.display = 'block';
+                videos[index].play();
+
+                // Update caption
+                caption.textContent = captionsList[index];
+            }
+
+            // Event listeners for buttons
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+                showVideo(currentIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % videos.length;
+                showVideo(currentIndex);
+            });
+
+            // Initialize first video
+            showVideo(currentIndex);
+        });
+    </script>
+
+
+</body>
+
+</html>
